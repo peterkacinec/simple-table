@@ -1,0 +1,21 @@
+{
+    "name": "peterkacinec/simple-table",
+    "authors": [
+        {
+            "name": "Peter Kacinec",
+            "email": "kacinec.peter@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "KornerBI\\SimpleTable\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KornerBI\\SimpleTable\\SimpleTableServiceProvider"
+            ]
+        }
+    }
+}
