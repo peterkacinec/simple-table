@@ -1,5 +1,6 @@
 {
     "name": "peterkacinec/simple-table",
+    "description": "Table view component",
     "version": "1.0.0",
     "authors": [
         {

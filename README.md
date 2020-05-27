@@ -5,7 +5,8 @@
 - doplnit do suboru composer.json
 ```
 "require": {
-    ...
+    ...,
+    "peterkacinec/simple-table": "@dev"
 },
 "repositories": [
     {
@@ -22,7 +23,6 @@
 V cistej instalaci noveho projektu Laravel treba dodrzat tento postup:
 
 - `laravel new NazovProjektu`
-- `composer install`
 - `npm install`
 - vo vasom projekte do suboru `resources/js/app.js` treba nalinkovat komponentu pridanim riadku `Vue.component('simple-table-component', require('../../vendor/peterkacinec/simple-table/src/resources/js/components/SimpleTableComponent').default);`
 - spustit prikaz `npm run dev` alebo `npm run watch`

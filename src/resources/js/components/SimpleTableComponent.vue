@@ -14,7 +14,7 @@
                 <td v-if="actions.length > 0" class="align-middle" style="width: 150px">
                     <div>
                         <a
-                            type="button"
+                            role="button"
                             v-bind:href="action.url ? (action.url.link + item[action.url.attribute]) : ''"
                             v-for="action in actions"
                             :class="action.class"
