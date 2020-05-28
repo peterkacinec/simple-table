@@ -15,6 +15,7 @@ class SimpleTable
 
     /**
      * SimpleTable constructor.
+     *
      * @param $entityRoutePrefix String define base url link for action button
      * @param $data array of data, that shows in table
      * @param $columns array of columns desc
@@ -27,35 +28,58 @@ class SimpleTable
 
         if (is_null($actions)) {
             $this->entityRoutePrefix = $entityRoutePrefix;
-            $this->actions = $this->setDefaultActions();
+            $this->actions = $this->getDefaultActions();
         } else {
             $this->actions = $actions;
         }
     }
 
-    private function setDefaultActions() {
+    /**
+     * Sets default actions 'Detail' and 'Delete' for every row in table
+     *
+     * @return array[]
+     */
+    private function getDefaultActions() {
         return [
             [
-                'label' => __('simple-table::general.Detail'),
+                'label' => '<i class="material-icons">visibility</i>',
+                'title' => __('user-management::general.Detail'),
                 'key' => 'detail',
                 'class' => 'btn btn-primary btn-sm mr-1',
-                'url' => [
-                    'link' => $this->entityRoutePrefix,
+                'link' => [
+                    'prefix' => $this->entityRoutePrefix,
                     'attribute' => 'id',
                 ]
             ],
             [
-                'label' => __('simple-table::general.Delete'),
+                'label' => '<i class="material-icons">edit</i>',
+                'title' => __('user-management::general.Edit'),
+                'key' => 'edit',
+                'class' => 'btn btn-primary btn-sm mr-1',
+                'link' => [
+                    'prefix' => $this->entityRoutePrefix,
+                    'attribute' => 'id',
+                    'postfix' => '/edit'
+                ]
+            ],
+            [
+                'label' => '<i class="material-icons">delete</i>',
+                'title' => __('user-management::general.Delete'),
                 'key' => 'delete',
                 'class' => 'btn btn-danger btn-sm',
-                'url' => [
-                    'link' => $this->entityRoutePrefix,
+                'link' => [
+                    'prefix' => $this->entityRoutePrefix,
                     'attribute' => 'id',
                 ]
             ]
         ];
     }
 
+    /**
+     * Sends data to blade template, which contains Vue component
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function render()
     {
         return view('simple-table::simple-table', ['config' => [
