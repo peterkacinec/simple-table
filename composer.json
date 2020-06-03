@@ -29,5 +29,7 @@
                 "KornerBI\\SimpleTable\\SimpleTableServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
