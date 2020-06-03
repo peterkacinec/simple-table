@@ -24,6 +24,7 @@ V cistej instalaci noveho projektu Laravel treba dodrzat tento postup:
 
 - `laravel new NazovProjektu`
 - `npm install`
+- publishnutie assetov (ikonky buttonov z material icons) `php artisan vendor:publish --tag=public --force`
 - vo vasom projekte do suboru `resources/js/app.js` treba nalinkovat komponentu pridanim riadku `Vue.component('simple-table-component', require('../../vendor/peterkacinec/simple-table/src/resources/js/components/SimpleTableComponent').default);`
 - spustit prikaz `npm run dev` alebo `npm run watch`
 

@@ -10,6 +10,7 @@ return [
     'Back' => 'Späť',
     'Created at' => 'Dátum vytvorenia',
     'Updated at' => 'Dátum poslednej úpravy',
+    'Confirmation delete' => 'Naozaj chcete vymazať údaje?',
 
     'Updated successfully' => 'Údaje úspešne aktualizované',
     'Update failed' => 'Údaje sa nepodarilo uložiť, skúste znovu prosím',
