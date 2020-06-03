@@ -42,35 +42,28 @@ class SimpleTable
     private function getDefaultActions() {
         return [
             [
-                'label' => '<i class="material-icons">visibility</i>',
-                'title' => __('user-management::general.Detail'),
+                'label' => '<img src="'.asset('simple-table/assets/image/visibility-white-18dp.svg').'"/>',
+                'title' => __('simple-table::general.Detail'),
                 'key' => 'detail',
                 'class' => 'btn btn-primary btn-sm mr-1',
-                'link' => [
-                    'prefix' => $this->entityRoutePrefix,
-                    'attribute' => 'id',
-                ]
+                'url' => url(config('simple-table.route-prefix').$this->entityRoutePrefix.'{id}')
             ],
             [
-                'label' => '<i class="material-icons">edit</i>',
-                'title' => __('user-management::general.Edit'),
+                'label' => '<img src="'.asset('simple-table/assets/image/edit-white-18dp.svg').'"/>',
+                'title' => __('simple-table::general.Edit'),
                 'key' => 'edit',
                 'class' => 'btn btn-primary btn-sm mr-1',
-                'link' => [
-                    'prefix' => $this->entityRoutePrefix,
-                    'attribute' => 'id',
-                    'postfix' => '/edit'
-                ]
+                'url' => url(config('simple-table.route-prefix').$this->entityRoutePrefix.'{id}/edit')
             ],
             [
-                'label' => '<i class="material-icons">delete</i>',
-                'title' => __('user-management::general.Delete'),
+                'label' => '<img src="'.asset('simple-table/assets/image/delete-white-18dp.svg').'"/>',
+                'title' => __('simple-table::general.Delete'),
                 'key' => 'delete',
-                'class' => 'btn btn-danger btn-sm',
-                'link' => [
-                    'prefix' => $this->entityRoutePrefix,
-                    'attribute' => 'id',
-                ]
+                'class' => 'btn btn-sm btn-danger',
+                'url' => url(config('simple-table.route-prefix').$this->entityRoutePrefix.'{id}'),
+                'dataToggle' => 'modal',
+                'dataTarget' => '#modalConfirm',
+                'modalText' => __('simple-table::modal.Confirmation delete')
             ]
         ];
     }

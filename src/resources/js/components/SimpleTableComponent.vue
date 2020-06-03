@@ -2,32 +2,33 @@
     <div class="table-responsive">
         <table class="table table-striped table-hover table-sm">
             <thead class="thead-dark">
-                <tr>
-                    <th v-for="column in columns" :key="column.key"
-                        style="cursor:pointer;">{{column.label}}
-                    </th>
-                    <th style="width: 140px" v-if="actions.length > 0">Actions</th>
-                </tr>
+            <tr>
+                <th v-for="column in columns" :key="column.key"
+                    style="cursor:pointer;">{{column.label}}
+                </th>
+                <th style="width: 140px" v-if="actions.length > 0">Actions</th>
+            </tr>
             </thead>
             <tbody>
-                <tr v-for="item in data" :key="item.id">
-                    <td class="align-middle" v-for="column in columns">{{ item[column.key] }}</td>
-                    <td v-if="actions.length > 0" class="align-middle" style="width: 150px">
-                        <div>
-                            <a
-                                type="button"
-                                v-for="action in actions"
-                                :title=action.title
-                                v-bind:href="action.link ? (action.link.prefix + item[action.link.attribute] + (action.link.postfix || '')) : ''"
-                                :class="action.class"
-                                v-html="action.label"
-                                onclick="this.blur();"
-                            >{{action.label}}</a>
-                        </div>
-                    </td>
-                </tr>
+            <tr v-for="item in data" :key="item.id">
+                <td class="align-middle" v-for="column in columns">{{ item[column.key] }}</td>
+                <td v-if="actions.length > 0" class="align-middle" style="width: 150px">
+                    <a
+                        role="button"
+                        v-for="action in actions"
+                        :title=action.title
+                        v-bind:href=buildUrl(action.url,item)
+                        :class=action.class
+                        v-html=action.label
+                        :data-toggle="action.dataToggle || null"
+                        :data-target="action.dataTarget || null"
+                        v-on:click="action.dataToggle ? showModal(buildUrl(action.url,item),action.modalText) : null"
+                    ></a>
+                </td>
+            </tr>
             </tbody>
         </table>
+        <modal-component :config="{modalText, url:modalUrl}"></modal-component>
     </div>
 </template>
 
@@ -35,23 +36,34 @@
     export default {
         props: ['config'],
         data() {
-            let res = this.loadData(this.config);
+            let conf = this.loadConfig(this.config);
 
-            if (res) {
-                const data    = res.data || {};
-                const columns = res.columns || {};
-                const actions = res.actions || {};
-
+            if (conf) {
                 return {
-                    data,
-                    columns,
-                    actions
+                    data:    conf.data || {},
+                    columns: conf.columns || {},
+                    actions: conf.actions || {},
+                    modalText: '',
+                    modalUrl: ''
                 }
             }
         },
         methods: {
-            loadData(data) {
-                return JSON.parse(data);
+            loadConfig(conf) {
+                return JSON.parse(conf);
+            },
+            buildUrl(urlTemplate, data) {
+                let resolvedUrl;
+                let params = urlTemplate.match(/[^{\}]+(?=})/g);
+                params.forEach(param => {
+                    resolvedUrl = urlTemplate.replace(`{${param}}`,data[param]);
+                });
+
+                return resolvedUrl;
+            },
+            showModal(url,text) {
+                this.modalUrl = url;
+                this.modalText = text;
             }
         }
     };

@@ -1,6 +1,7 @@
 {
     "name": "peterkacinec/simple-table",
     "description": "Table view component",
+    "keywords": ["table"],
     "version": "1.0.0",
     "authors": [
         {
@@ -12,6 +13,15 @@
         "psr-4": {
             "KornerBI\\SimpleTable\\": "src/"
         }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/peterkacinec/modal"
+        }
+    ],
+    "require": {
+        "peterkacinec/modal": "@dev"
     },
     "extra": {
         "laravel": {

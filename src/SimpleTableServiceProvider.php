@@ -25,5 +25,13 @@ class SimpleTableServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'simple-table');
         $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'simple-table');
+
+        $this->publishes([
+            __DIR__.'/config/simple-table.php' => config_path('simple-table.php')
+        ], 'config');
+        $this->publishes([
+            __DIR__.'/resources/assets' => public_path('simple-table/assets'),
+        ], 'public');
+
     }
 }
